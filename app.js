@@ -7,7 +7,19 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+//importing mongoose to web app
+var mongoose = require("mongoose");
+
 var app = express();
+
+//setting up mongoDB
+var psw = "PasswordMonster123";
+var uri = `mongodb+srv://BossN_gga:${psw}@cluster0.8wns0.mongodb.net/local_library?retryWrites=true&w=majority`;
+mongoose.connect(uri,{useNewUrlParser: true, useUnifiedTopology: true})
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, "MongoDB connection error:"))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
